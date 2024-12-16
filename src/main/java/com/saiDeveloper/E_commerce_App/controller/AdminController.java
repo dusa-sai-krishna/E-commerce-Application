@@ -26,7 +26,7 @@ public class AdminController {
     public String validateAdmin(@ModelAttribute("admin") Admin admin, Model model){
 
         if(adminService.validateAdmin(admin.getEmail(), admin.getPassword())){
-            return "" ;
+            return "/admin/ home" ;
         }
         else{
             model.addAttribute("error", "Invalid credentials");
@@ -56,12 +56,12 @@ public class AdminController {
         adminService.addAdmin(admin);
         return "redirect:/admin/home";
     }
-
+//---------------------update methods---------------------
     @GetMapping("/update/admin/{id}")
     public String updateAdmin(@PathVariable("id") long id, Model model){
 
         model.addAttribute("admin", adminService.findById(id));
-        return "UpdateAdmin";
+        return "UpdateUser";
     }
 
     @PostMapping("/update/admin")
@@ -70,7 +70,7 @@ public class AdminController {
         adminService.updateAdmin(admin);
         return "redirect:/admin/home";
     }
-
+//---------------------delete methods---------------------
     @DeleteMapping("/delete/admin/{id}")
     public String deleteAdmin(@PathVariable("id") long id){
 

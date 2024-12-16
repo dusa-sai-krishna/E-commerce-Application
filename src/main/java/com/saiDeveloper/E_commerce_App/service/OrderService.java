@@ -23,8 +23,8 @@ public class OrderService {
         return repo.findById(id).orElseThrow(()-> new RuntimeException("Order with id"+ id + "not found"));
     }
 
-    public Order findByUser(User user){
-        return repo.findByUser(user).orElseThrow(()-> new RuntimeException("Order of user with userId"+ user.getUserId() + "not found"));
+    public List<Order> findByUser(User user){
+        return repo.findByUser(user);
     }
 
     // ------------add methods------------------o
