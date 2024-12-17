@@ -2,8 +2,10 @@ package com.saiDeveloper.E_commerce_App.controller;
 
 import com.saiDeveloper.E_commerce_App.Entity.Admin;
 import com.saiDeveloper.E_commerce_App.Entity.Order;
+import com.saiDeveloper.E_commerce_App.Entity.Product;
 import com.saiDeveloper.E_commerce_App.Entity.User;
 import com.saiDeveloper.E_commerce_App.service.OrderService;
+import com.saiDeveloper.E_commerce_App.service.ProductService;
 import com.saiDeveloper.E_commerce_App.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ProductService productService;
 
     private User user;
     @GetMapping("/add/user")
@@ -78,6 +83,21 @@ public class UserController {
         return "OrderStatus";
     }
 
+    //-------------------product search ------------------------------
+    @GetMapping("/product/search")
+    public String productSearch(String name, Model model){
+
+        try {
+            Product product = productService.findByName(name);
+            model.addAttribute("product", product);
+            model.addAttribute("ordersList",orderService.findByUser(user));
+            return "ProductPage";
+        } catch (Exception e) {
+            model.addAttribute("error",e);
+            model.addAttribute("ordersList",orderService.findByUser(user));
+            return "ProductPage";
+        }
+    }
 
 
 
