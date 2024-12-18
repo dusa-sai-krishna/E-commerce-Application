@@ -19,7 +19,7 @@ public class ProductController {
     @PostMapping("add/product")
     public String addProduct(@ModelAttribute("product") Product product){
         productService.addProduct(product);
-        return "/admin/home";
+        return "redirect:/admin/home";
     }
 
     @GetMapping("update/product/{id}")
@@ -37,21 +37,21 @@ public class ProductController {
     public String updateProduct(@ModelAttribute("product") Product product, Model model){
         try {
             productService.updateProduct(product);
-            return "/admin/home";
+            return "redirect:/admin/home";
         } catch (Exception e) {
             model.addAttribute("error", e);
             return "UpdateProduct";
         }
     }
 
-    @DeleteMapping("delete/product/{id}")
+    @GetMapping("delete/product/{id}")
     public String deleteProduct(@PathVariable("id") Long id,Model model){
         try {
             productService.deleteProduct(id);
-            return "/admin/home";
+            return "redirect:/admin/home";
         } catch (Exception e) {
             model.addAttribute("error", e);
-            return "/admin/home";
+            return "redirect:/admin/home";
         }
     }
 

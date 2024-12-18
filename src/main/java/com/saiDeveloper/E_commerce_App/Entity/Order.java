@@ -21,6 +21,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long orderId;
+    private String name;
     private double price;
     private int quantity;
     private Date date;
